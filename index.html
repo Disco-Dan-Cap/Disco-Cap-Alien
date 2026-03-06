@@ -1,0 +1,2395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="theme-color" content="#0D0E11" />
+<title>Disco Capital — The Future of Startup Investing</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================
+   DISCO CAPITAL v2 — ENHANCED WITH FULL CSS SYSTEM
+   Design System: Alien Pixels Aesthetic
+   Data-driven rendering with rich HTML structure
+   ============================================ */
+
+:root {
+  /* Backgrounds */
+  --bg-app: #0D0E11;
+  --bg-card: #151618;
+  --bg-card-hover: #1A1B1F;
+  --bg-card-elevated: #1E1F23;
+  --bg-input: #1A1B1F;
+  --bg-row-alt: #131415;
+  --bg-row-hover: #1C1D21;
+  --bg-nav: rgba(21, 22, 24, 0.92);
+
+  /* Primary Green */
+  --green-500: #00E87B;
+  --green-400: #33FF99;
+  --green-600: #00C466;
+  --green-glow: rgba(0, 232, 123, 0.25);
+  --green-glow-strong: rgba(0, 232, 123, 0.40);
+  --green-glow-subtle: rgba(0, 232, 123, 0.10);
+
+  /* Accents */
+  --cyan-500: #00D4FF;
+  --cyan-glow: rgba(0, 212, 255, 0.25);
+  --purple-500: #8B5CF6;
+  --purple-glow: rgba(139, 92, 246, 0.25);
+  --pink-500: #FF3B7A;
+  --pink-glow: rgba(255, 59, 122, 0.25);
+  --yellow-500: #FBBF24;
+  --orange-500: #FF6B35;
+  --blue-500: #3B82F6;
+
+  /* Text */
+  --text-primary: #FFFFFF;
+  --text-secondary: #9CA3AF;
+  --text-tertiary: #6B7280;
+  --text-positive: #00E87B;
+  --text-negative: #FF3B7A;
+  --text-link: #00D4FF;
+
+  /* Borders */
+  --border-card: #222328;
+  --border-divider: #2A2B30;
+  --border-input: #333438;
+  --border-focus: #00E87B;
+
+  /* Typography */
+  --font-heading: 'Inter', -apple-system, sans-serif;
+  --font-body: 'Inter', -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'SF Mono', monospace;
+
+  /* Spacing */
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px;
+  --space-5: 20px; --space-6: 24px; --space-8: 32px; --space-10: 40px;
+
+  /* Radii */
+  --radius-sm: 8px; --radius-md: 12px; --radius-lg: 16px; --radius-xl: 20px; --radius-full: 9999px;
+
+  /* Motion */
+  --duration-fast: 150ms; --duration-normal: 250ms; --duration-slow: 400ms;
+  --ease-default: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+button, a, [onclick] { touch-action: manipulation; -webkit-touch-callout: none; }
+body {
+  background: var(--bg-app);
+  font-family: var(--font-body);
+  color: var(--text-primary);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  overflow-x: hidden;
+}
+
+#app {
+  width: 100%;
+  max-width: 430px;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border-input); border-radius: 4px; }
+
+/* ===== ANIMATIONS ===== */
+@keyframes glow-pulse {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
+}
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes slide-up {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+@keyframes bar-grow {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+@keyframes bar-grow-y {
+  from { transform: scaleY(0); }
+  to { transform: scaleY(1); }
+}
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+@keyframes glow-breathe {
+  0%, 100% { box-shadow: 0 0 20px rgba(0,232,123,0.15), 0 0 40px rgba(0,232,123,0.05); }
+  50% { box-shadow: 0 0 30px rgba(0,232,123,0.25), 0 0 60px rgba(0,232,123,0.1); }
+}
+
+.fade-in { animation: fade-in 0.5s var(--ease-default) forwards; }
+.fade-in-delay-1 { animation: fade-in 0.5s var(--ease-default) 0.1s forwards; opacity: 0; }
+.fade-in-delay-2 { animation: fade-in 0.5s var(--ease-default) 0.2s forwards; opacity: 0; }
+.fade-in-delay-3 { animation: fade-in 0.5s var(--ease-default) 0.3s forwards; opacity: 0; }
+
+/* ===== TYPOGRAPHY ===== */
+.mono { font-family: var(--font-mono); }
+.text-xs { font-size: 10px; line-height: 14px; }
+.text-sm { font-size: 12px; line-height: 16px; }
+.text-base { font-size: 14px; line-height: 20px; }
+.text-lg { font-size: 18px; line-height: 26px; }
+.text-xl { font-size: 20px; line-height: 28px; }
+.text-2xl { font-size: 24px; line-height: 32px; }
+.text-3xl { font-size: 30px; line-height: 36px; }
+.text-4xl { font-size: 36px; line-height: 40px; }
+.font-medium { font-weight: 500; }
+.font-semibold { font-weight: 600; }
+.font-bold { font-weight: 700; }
+.font-extrabold { font-weight: 800; }
+.text-secondary { color: var(--text-secondary); }
+.text-tertiary { color: var(--text-tertiary); }
+.text-positive { color: var(--text-positive); }
+.text-negative { color: var(--text-negative); }
+.tracking-wide { letter-spacing: 0.05em; }
+
+/* ===== SCREEN CONTAINER ===== */
+.screen {
+  display: none;
+  padding: 0 var(--space-4) var(--space-4);
+  padding-bottom: 100px;
+  min-height: 100vh;
+}
+.screen.active { display: block; }
+.screen-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  padding: var(--space-4) 0;
+  background: linear-gradient(to bottom, var(--bg-app) 70%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+.screen-title {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+/* ===== CARDS ===== */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  transition: all var(--duration-normal) var(--ease-default);
+}
+.card:hover { background: var(--bg-card-hover); }
+.card-glow {
+  box-shadow: 0 4px 24px rgba(0,0,0,0.4), 0 0 60px rgba(0,232,123,0.06);
+}
+.card-glow:hover {
+  box-shadow: 0 4px 24px rgba(0,0,0,0.4), 0 0 60px rgba(0,232,123,0.12);
+  border-color: rgba(0,232,123,0.15);
+}
+.card-featured {
+  animation: glow-breathe 3s ease-in-out infinite;
+  border-color: rgba(0,232,123,0.2);
+}
+.card-compact { padding: var(--space-4); }
+.card + .card { margin-top: var(--space-3); }
+
+/* ===== BUTTONS ===== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-5);
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all var(--duration-fast) var(--ease-default);
+}
+.btn-primary {
+  background: var(--green-500);
+  color: #000;
+  box-shadow: 0 0 20px var(--green-glow);
+}
+.btn-primary:hover {
+  background: var(--green-400);
+  box-shadow: 0 0 12px var(--green-glow-strong), 0 0 30px var(--green-glow);
+  transform: translateY(-1px);
+}
+.btn-primary:active { transform: translateY(0); box-shadow: 0 0 6px var(--green-glow-strong); }
+
+.btn-secondary {
+  background: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--border-input);
+}
+.btn-secondary:hover { background: var(--bg-card-hover); border-color: var(--text-tertiary); }
+
+.btn-danger {
+  background: var(--pink-500);
+  color: #fff;
+  box-shadow: 0 0 20px var(--pink-glow);
+}
+.btn-danger:hover { box-shadow: 0 0 12px rgba(255,59,122,0.5), 0 0 30px var(--pink-glow); }
+
+.btn-sm { padding: var(--space-2) var(--space-3); font-size: 12px; border-radius: var(--radius-sm); }
+.btn-lg { padding: var(--space-4) var(--space-8); font-size: 16px; }
+.btn-full { width: 100%; }
+.btn-pill { border-radius: var(--radius-full); }
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text-secondary);
+  padding: var(--space-2);
+}
+.btn-ghost:hover { color: var(--text-primary); background: var(--bg-card-hover); }
+
+/* ===== TAB SYSTEM ===== */
+.tabs {
+  display: flex;
+  gap: var(--space-1);
+  background: var(--bg-card);
+  border-radius: var(--radius-md);
+  padding: var(--space-1);
+  margin-bottom: var(--space-4);
+}
+.tab {
+  flex: 1;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+  color: var(--text-secondary);
+  transition: all var(--duration-fast) var(--ease-default);
+  border: none;
+  background: transparent;
+}
+.tab.active {
+  background: var(--bg-card-elevated);
+  color: var(--green-500);
+  box-shadow: 0 0 12px var(--green-glow-subtle);
+}
+.tab:hover:not(.active) { color: var(--text-primary); }
+
+/* ===== INPUTS ===== */
+.input-group { margin-bottom: var(--space-4); }
+.input-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-2);
+}
+.input {
+  width: 100%;
+  background: var(--bg-input);
+  border: 1px solid var(--border-input);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-4);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 14px;
+  transition: all var(--duration-fast) var(--ease-default);
+  outline: none;
+}
+.input:focus {
+  border-color: var(--green-500);
+  box-shadow: 0 0 0 3px var(--green-glow-subtle);
+}
+.input::placeholder { color: var(--text-tertiary); }
+.input-mono { font-family: var(--font-mono); letter-spacing: 0.02em; }
+
+/* ===== SEARCH BAR ===== */
+.search-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  background: var(--bg-input);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-4);
+  margin-bottom: var(--space-4);
+}
+.search-bar svg { color: var(--text-tertiary); flex-shrink: 0; }
+.search-bar input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  font-size: 14px;
+  outline: none;
+}
+.search-bar input::placeholder { color: var(--text-tertiary); }
+
+/* ===== PROGRESS BAR WITH GLOW ===== */
+.progress-bar {
+  height: 8px;
+  background: var(--bg-input);
+  border-radius: var(--radius-full);
+  overflow: visible;
+  position: relative;
+}
+.progress-fill {
+  height: 100%;
+  border-radius: var(--radius-full);
+  background: var(--green-500);
+  box-shadow: 0 0 8px var(--green-glow-strong), 0 0 20px var(--green-glow);
+  position: relative;
+  animation: bar-grow 1s var(--ease-default) forwards;
+  transform-origin: left;
+}
+
+/* ===== METRIC DISPLAY ===== */
+.metric {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.metric-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+.metric-value {
+  font-family: var(--font-mono);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: 0.02em;
+  line-height: 1.1;
+}
+.metric-value-lg { font-size: 36px; }
+.metric-value-sm { font-size: 20px; }
+.metric-change {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+}
+.metric-change.positive { color: var(--text-positive); }
+.metric-change.negative { color: var(--text-negative); }
+.metric-compare {
+  font-size: 11px;
+  color: var(--text-tertiary);
+}
+
+/* ===== BADGES ===== */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: 3px 8px;
+  border-radius: var(--radius-full);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+.badge-green { background: rgba(0,232,123,0.12); color: var(--green-500); }
+.badge-cyan { background: rgba(0,212,255,0.12); color: var(--cyan-500); }
+.badge-purple { background: rgba(139,92,246,0.12); color: var(--purple-500); }
+.badge-pink { background: rgba(255,59,122,0.12); color: var(--pink-500); }
+.badge-yellow { background: rgba(251,191,36,0.12); color: var(--yellow-500); }
+
+/* ===== AVATAR ===== */
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-full);
+  background: linear-gradient(135deg, var(--purple-500), var(--cyan-500));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+.avatar-sm { width: 32px; height: 32px; font-size: 12px; }
+.avatar-lg { width: 56px; height: 56px; font-size: 20px; }
+.avatar-xl { width: 72px; height: 72px; font-size: 28px; }
+.avatar img { width: 100%; height: 100%; object-fit: cover; border-radius: var(--radius-full); }
+.avatar-glow {
+  box-shadow: 0 0 16px var(--green-glow), 0 0 32px var(--green-glow-subtle);
+}
+
+/* ===== TABLE ROWS ===== */
+.table-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--border-divider);
+}
+.table-row:last-child { border-bottom: none; }
+.table-row-label { color: var(--text-secondary); font-size: 14px; }
+.table-row-value { font-family: var(--font-mono); font-weight: 500; font-size: 14px; }
+
+/* ===== DIVIDER ===== */
+.divider { height: 1px; background: var(--border-divider); margin: var(--space-4) 0; }
+
+/* ===== BOTTOM NAV ===== */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 430px;
+  background: var(--bg-nav);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 1px solid var(--border-card);
+  display: flex;
+  padding: var(--space-2) var(--space-2) max(var(--space-2), env(safe-area-inset-bottom));
+  z-index: 100;
+}
+.nav-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: var(--space-2) 0;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  transition: all var(--duration-fast) var(--ease-default);
+}
+.nav-icon {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-tertiary);
+  transition: all var(--duration-fast) var(--ease-default);
+}
+.nav-label {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  transition: color var(--duration-fast) var(--ease-default);
+}
+.nav-item.active .nav-icon {
+  color: var(--green-500);
+  filter: drop-shadow(0 0 6px var(--green-glow));
+}
+.nav-item.active .nav-label { color: var(--green-500); }
+.nav-item:hover:not(.active) .nav-icon { color: var(--text-secondary); }
+
+/* ===== GLOW CHART BARS ===== */
+.chart-bar-h {
+  height: 10px;
+  border-radius: var(--radius-full);
+  position: relative;
+  animation: bar-grow 0.8s var(--ease-default) forwards;
+  transform-origin: left;
+}
+.chart-bar-v {
+  width: 10px;
+  border-radius: var(--radius-full);
+  position: relative;
+  animation: bar-grow-y 0.8s var(--ease-default) forwards;
+  transform-origin: bottom;
+}
+.glow-green-bar { background: var(--green-500); box-shadow: 0 0 8px var(--green-glow-strong), 0 0 20px var(--green-glow); }
+.glow-cyan-bar { background: var(--cyan-500); box-shadow: 0 0 8px rgba(0,212,255,0.4), 0 0 20px var(--cyan-glow); }
+.glow-purple-bar { background: var(--purple-500); box-shadow: 0 0 8px rgba(139,92,246,0.4), 0 0 20px var(--purple-glow); }
+.glow-pink-bar { background: var(--pink-500); box-shadow: 0 0 8px rgba(255,59,122,0.4), 0 0 20px var(--pink-glow); }
+.glow-blue-bar { background: var(--blue-500); box-shadow: 0 0 8px rgba(59,130,246,0.4), 0 0 20px rgba(59,130,246,0.25); }
+.glow-yellow-bar { background: var(--yellow-500); box-shadow: 0 0 8px rgba(251,191,36,0.4), 0 0 20px rgba(251,191,36,0.25); }
+
+/* ===== SPARKLINE / MINI CHART ===== */
+.sparkline-container {
+  position: relative;
+  height: 60px;
+  overflow: hidden;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+}
+.sparkline-glow {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  background: linear-gradient(to top, rgba(0,232,123,0.12) 0%, rgba(0,232,123,0.03) 50%, transparent 100%);
+}
+
+/* ===== MODAL ===== */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  z-index: 200;
+  align-items: flex-end;
+  justify-content: center;
+}
+.modal-overlay.active { display: flex; }
+.modal-content {
+  width: 100%;
+  max-width: 430px;
+  max-height: 90vh;
+  background: var(--bg-card);
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  overflow-y: auto;
+  animation: slide-up 0.35s var(--ease-default);
+}
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-5) var(--space-6);
+  border-bottom: 1px solid var(--border-divider);
+  position: sticky;
+  top: 0;
+  background: var(--bg-card);
+  z-index: 10;
+}
+.modal-body { padding: var(--space-6); }
+
+/* ===== COMPANY LOGO ===== */
+.company-logo {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  background: var(--bg-card-elevated);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+  border: 1px solid var(--border-card);
+}
+.company-logo-sm { width: 36px; height: 36px; font-size: 16px; border-radius: var(--radius-sm); }
+
+/* ===== STACKED CHART ===== */
+.stacked-chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  height: 120px;
+  padding: var(--space-4) 0;
+}
+.stacked-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 3px;
+  height: 100%;
+}
+
+/* ===== FILTER CHIPS ===== */
+.filter-chips {
+  display: flex;
+  gap: var(--space-2);
+  overflow-x: auto;
+  padding-bottom: var(--space-2);
+  -webkit-overflow-scrolling: touch;
+  margin-bottom: var(--space-4);
+}
+.filter-chips::-webkit-scrollbar { display: none; }
+.chip {
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-full);
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+  cursor: pointer;
+  border: 1px solid var(--border-input);
+  background: transparent;
+  color: var(--text-secondary);
+  transition: all var(--duration-fast) var(--ease-default);
+}
+.chip.active {
+  background: var(--green-500);
+  color: #000;
+  border-color: var(--green-500);
+  box-shadow: 0 0 12px var(--green-glow);
+}
+.chip:hover:not(.active) { border-color: var(--text-tertiary); color: var(--text-primary); }
+
+/* ===== CATEGORY DROPDOWN ===== */
+.category-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-3) 0;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  width: 100%;
+  color: var(--green-500);
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: var(--space-3);
+}
+.category-toggle svg {
+  transition: transform var(--duration-normal) var(--ease-default);
+  color: var(--green-500);
+}
+.category-toggle.open svg {
+  transform: rotate(180deg);
+}
+.category-dropdown {
+  display: none;
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  margin-bottom: var(--space-4);
+  animation: fade-in 0.3s var(--ease-default) forwards;
+}
+.category-dropdown.open { display: block; }
+.category-dropdown .section-label {
+  color: var(--text-tertiary);
+  margin-top: var(--space-5);
+  margin-bottom: var(--space-3);
+}
+.category-dropdown .section-label:first-child { margin-top: 0; }
+.cat-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+.cat-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: pointer;
+  border: 1px solid var(--border-input);
+  background: transparent;
+  color: var(--text-secondary);
+  transition: all var(--duration-fast) var(--ease-default);
+}
+.cat-chip:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--text-tertiary);
+  color: var(--text-primary);
+}
+.cat-chip.selected {
+  background: var(--green-500);
+  border-color: var(--green-500);
+  color: #000;
+  box-shadow: 0 0 12px var(--green-glow), 0 0 24px var(--green-glow-subtle);
+  font-weight: 700;
+}
+.cat-stage-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-2);
+}
+.cat-stage-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  border: 1px solid var(--border-input);
+  background: transparent;
+  color: var(--text-secondary);
+  transition: all var(--duration-fast) var(--ease-default);
+  font-family: var(--font-body);
+}
+.cat-stage-btn:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--text-tertiary);
+  color: var(--text-primary);
+}
+.cat-stage-btn.selected {
+  background: var(--green-500);
+  border-color: var(--green-500);
+  color: #000;
+  font-weight: 700;
+  box-shadow: 0 0 12px var(--green-glow);
+}
+.active-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+}
+.active-filter-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  font-size: 11px;
+  font-weight: 600;
+  background: rgba(0, 232, 123, 0.12);
+  color: var(--green-500);
+  border: 1px solid rgba(0, 232, 123, 0.25);
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-default);
+}
+.active-filter-tag:hover {
+  background: rgba(0, 232, 123, 0.22);
+  border-color: rgba(0, 232, 123, 0.4);
+}
+.active-filter-tag svg { flex-shrink: 0; }
+
+/* ===== CLICKABLE COMPANY NAME LINK ===== */
+.company-link {
+  color: var(--green-500);
+  font-weight: 600;
+  text-shadow: 0 0 8px var(--green-glow);
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-default);
+  text-decoration: none;
+}
+.company-link:hover {
+  color: var(--green-400);
+  text-shadow: 0 0 12px var(--green-glow-strong), 0 0 24px var(--green-glow);
+}
+
+/* ===== NOTIFICATION DOT ===== */
+.notification-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--green-500);
+  box-shadow: 0 0 6px var(--green-glow-strong);
+  animation: glow-pulse 2s ease-in-out infinite;
+}
+
+/* ===== ONBOARDING ===== */
+.onboarding-screen {
+  display: none;
+  min-height: 100vh;
+  padding: var(--space-8) var(--space-6);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.onboarding-screen.active { display: flex; }
+
+.disco-orb {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, var(--green-400), var(--cyan-500), var(--purple-500));
+  box-shadow: 0 0 40px var(--green-glow-strong), 0 0 80px var(--green-glow), 0 0 120px var(--purple-glow);
+  animation: float 3s ease-in-out infinite, glow-pulse 2s ease-in-out infinite;
+  margin-bottom: var(--space-8);
+  pointer-events: none;
+  position: relative;
+  z-index: 0;
+}
+.onboarding-screen .btn {
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== SOCIAL POST ===== */
+.post-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  transition: all var(--duration-normal) var(--ease-default);
+  cursor: pointer;
+}
+.post-card:hover { background: var(--bg-card-hover); }
+.post-card + .post-card { margin-top: var(--space-3); }
+
+/* ===== TRADING ===== */
+.order-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: var(--space-2);
+  padding: var(--space-2) 0;
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+.order-row.buy .price { color: var(--green-500); }
+.order-row.sell .price { color: var(--pink-500); }
+
+/* ===== WALLET CARD ===== */
+.wallet-card {
+  background: linear-gradient(135deg, #1a1e2e 0%, #0D0E11 100%);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+  position: relative;
+  overflow: hidden;
+}
+.wallet-card::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -30%;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,232,123,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* ===== NFT GRID ===== */
+.nft-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+}
+.nft-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: all var(--duration-normal) var(--ease-default);
+  cursor: pointer;
+}
+.nft-card:hover {
+  border-color: rgba(0,232,123,0.2);
+  box-shadow: 0 0 20px var(--green-glow-subtle);
+  transform: translateY(-2px);
+}
+.nft-image {
+  aspect-ratio: 1;
+  background: linear-gradient(135deg, var(--bg-card-elevated), var(--bg-input));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+}
+.nft-info { padding: var(--space-3); }
+
+/* ===== LIVE INDICATOR ===== */
+.live-dot {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--green-500);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.live-dot::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--green-500);
+  box-shadow: 0 0 6px var(--green-glow-strong);
+  animation: glow-pulse 1.5s ease-in-out infinite;
+}
+
+/* ===== SECTION LABEL ===== */
+.section-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  margin-bottom: var(--space-3);
+  margin-top: var(--space-5);
+}
+
+/* ===== TAG/CATEGORY ===== */
+.tag {
+  display: inline-flex;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  font-size: 10px;
+  font-weight: 500;
+  border: 1px solid var(--border-input);
+  color: var(--text-secondary);
+}
+
+/* ===== EMPTY STATE ===== */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-10) var(--space-6);
+  text-align: center;
+  color: var(--text-tertiary);
+}
+
+/* ===== TOAST ===== */
+.toast {
+  position: fixed;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--bg-card-elevated);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-5);
+  font-size: 13px;
+  font-weight: 500;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+  z-index: 300;
+  display: none;
+}
+.toast.active { display: block; animation: fade-in 0.3s var(--ease-default); }
+
+/* ===== UTILITY ===== */
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.items-center { align-items: center; }
+.justify-between { justify-content: space-between; }
+.gap-1 { gap: var(--space-1); }
+.gap-2 { gap: var(--space-2); }
+.gap-3 { gap: var(--space-3); }
+.gap-4 { gap: var(--space-4); }
+.gap-6 { gap: var(--space-6); }
+.mt-2 { margin-top: var(--space-2); }
+.mt-3 { margin-top: var(--space-3); }
+.mt-4 { margin-top: var(--space-4); }
+.mb-2 { margin-bottom: var(--space-2); }
+.mb-3 { margin-bottom: var(--space-3); }
+.mb-4 { margin-bottom: var(--space-4); }
+.ml-auto { margin-left: auto; }
+.flex-1 { flex: 1; }
+.truncate { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.w-full { width: 100%; }
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+.relative { position: relative; }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3); }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: var(--space-3); }
+</style>
+</head>
+<body>
+
+<div id="app">
+
+  <!-- ============================
+       ONBOARDING SCREEN
+       ============================ -->
+  <div class="onboarding-screen active" id="onboarding-screen">
+    <div class="disco-orb"></div>
+    <h1 style="font-size: 32px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: var(--space-3);">
+      Disco Capital
+    </h1>
+    <p style="color: var(--text-secondary); font-size: 16px; line-height: 1.5; max-width: 280px; margin-bottom: var(--space-8);">
+      Invest in tomorrow's startups. Trade fractional equity as NFTs. Join the dance floor.
+    </p>
+    <button class="btn btn-primary btn-lg btn-full btn-pill" style="max-width: 300px; margin-bottom: var(--space-4);" onclick="app.startApp()">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 12V8H6a2 2 0 0 1-2-2c0-1.1.9-2 2-2h12v4"/><path d="M4 6v12c0 1.1.9 2 2 2h14v-4"/><path d="M18 12a2 2 0 0 0 0 4h4v-4h-4z"/></svg>
+      Connect Wallet
+    </button>
+    <button class="btn btn-secondary btn-pill" style="max-width: 300px;" onclick="app.startApp()">
+      Explore First
+    </button>
+
+    <div style="margin-top: var(--space-10); display: flex; gap: var(--space-6); color: var(--text-tertiary); font-size: 12px;">
+      <div style="display: flex; align-items: center; gap: var(--space-2);">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--green-500)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Secured by Chainlink
+      </div>
+      <div style="display: flex; align-items: center; gap: var(--space-2);">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--green-500)" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+        SEC Compliant
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ============================
+       MAIN APP SHELL
+       ============================ -->
+  <div id="main-app" style="display:none;">
+
+    <!-- ========== SCREEN: FLOORS ========== -->
+    <div class="screen active" id="screen-floors">
+      <div class="screen-header">
+        <div class="flex items-center justify-between">
+          <div>
+            <div class="screen-title">Dance Floors</div>
+            <div class="text-sm text-secondary mt-2">Active funding rounds</div>
+          </div>
+          <button class="btn btn-ghost" style="border-radius: var(--radius-md); border: 1px solid var(--border-card); padding: 8px;" onclick="app.openModal('notifications-modal')">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Search -->
+      <div class="search-bar">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        <input type="text" placeholder="Search startups, sectors..." onkeyup="app.filterCompanies(this.value)" />
+      </div>
+
+      <!-- Category Dropdown Multi-Select -->
+      <button class="category-toggle" id="category-toggle" onclick="app.toggleCategoryDropdown()">
+        <span>All Categories</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+
+      <!-- Active Filter Tags -->
+      <div class="active-filters" id="active-filters"></div>
+
+      <div class="category-dropdown" id="category-dropdown">
+        <div class="section-label">Industry Verticals</div>
+        <div class="cat-chips" id="cat-verticals"></div>
+
+        <div class="section-label">Funding Stage</div>
+        <div class="cat-stage-grid" id="cat-stages"></div>
+
+        <div class="section-label">VC Host</div>
+        <div class="cat-chips" id="cat-vchosts"></div>
+      </div>
+
+      <!-- Featured Deal -->
+      <div class="section-label">Featured</div>
+      <div id="featured-company"></div>
+
+      <!-- Active Rounds List -->
+      <div class="section-label">Active Rounds</div>
+      <div id="floors-list"></div>
+    </div>
+
+    <!-- ========== SCREEN: WALLET ========== -->
+    <div class="screen" id="screen-wallet">
+      <div class="screen-header">
+        <div class="screen-title">Wallet</div>
+      </div>
+
+      <!-- Wallet Card -->
+      <div class="wallet-card mb-4 fade-in">
+        <div class="flex items-center justify-between mb-4">
+          <div class="text-sm text-secondary">Total Portfolio Value</div>
+          <div class="badge badge-green">Connected</div>
+        </div>
+        <div class="metric-value metric-value-lg mono font-bold" style="margin-bottom: 4px;">$47,832</div>
+        <div class="flex items-center gap-3">
+          <span class="metric-change positive mono">↑12.4%</span>
+          <span class="metric-compare">vs. last month</span>
+        </div>
+
+        <div class="divider" style="border-color: rgba(255,255,255,0.06);"></div>
+
+        <div class="grid-3">
+          <div class="metric">
+            <span class="metric-label">Invested</span>
+            <span class="mono font-semibold" style="font-size: 16px;">$32,500</span>
+          </div>
+          <div class="metric">
+            <span class="metric-label">Returns</span>
+            <span class="mono font-semibold text-positive" style="font-size: 16px;">$15,332</span>
+          </div>
+          <div class="metric">
+            <span class="metric-label">Holdings</span>
+            <span class="mono font-semibold" style="font-size: 16px;">12</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Portfolio Performance Chart Card -->
+      <div class="card mb-4 fade-in-delay-1">
+        <div class="flex items-center justify-between mb-4">
+          <span class="font-semibold">Portfolio Performance</span>
+          <div class="tabs" style="margin-bottom: 0; width: auto;">
+            <button class="tab active" style="padding: 4px 10px; font-size: 10px;">1W</button>
+            <button class="tab" style="padding: 4px 10px; font-size: 10px;">1M</button>
+            <button class="tab" style="padding: 4px 10px; font-size: 10px;">3M</button>
+            <button class="tab" style="padding: 4px 10px; font-size: 10px;">1Y</button>
+          </div>
+        </div>
+        <!-- SVG Chart with glow -->
+        <div style="position: relative; height: 140px; overflow: hidden;">
+          <svg width="100%" height="140" viewBox="0 0 380 140" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="rgba(0,232,123,0.3)"/>
+                <stop offset="100%" stop-color="rgba(0,232,123,0)"/>
+              </linearGradient>
+              <filter id="glow">
+                <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+            </defs>
+            <path d="M0,120 L25,110 L50,95 L75,100 L100,80 L125,85 L150,65 L175,70 L200,50 L225,55 L250,35 L275,40 L300,25 L325,30 L350,15 L380,20"
+                  fill="url(#chartGrad)" stroke="none"/>
+            <path d="M0,120 L25,110 L50,95 L75,100 L100,80 L125,85 L150,65 L175,70 L200,50 L225,55 L250,35 L275,40 L300,25 L325,30 L350,15 L380,20"
+                  fill="none" stroke="var(--green-500)" stroke-width="2.5" filter="url(#glow)"/>
+            <!-- Current value dot -->
+            <circle cx="380" cy="20" r="4" fill="var(--green-500)" filter="url(#glow)"/>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Holdings -->
+      <div class="section-label">Your Holdings</div>
+
+      <div class="nft-grid fade-in-delay-2" id="nft-grid">
+        <div class="nft-card" onclick="app.openModal('nft-detail-modal')">
+          <div class="nft-image" style="background: linear-gradient(135deg, #0a1a0f, #1a2e1a);">
+            <div style="width: 60px; height: 60px; border-radius: 12px; border: 2px solid var(--green-500); box-shadow: 0 0 20px var(--green-glow); display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: 700; font-family: var(--font-mono);">N</div>
+          </div>
+          <div class="nft-info">
+            <div class="font-semibold text-sm">NeuralPath AI</div>
+            <div class="mono text-sm font-semibold mt-2">$4,200</div>
+            <div class="metric-change positive mono text-xs">↑24.3%</div>
+          </div>
+        </div>
+
+        <div class="nft-card" onclick="app.openModal('nft-detail-modal')">
+          <div class="nft-image" style="background: linear-gradient(135deg, #0a0f1a, #1a1e2e);">
+            <div style="width: 60px; height: 60px; border-radius: 12px; border: 2px solid var(--cyan-500); box-shadow: 0 0 20px var(--cyan-glow); display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: 700; font-family: var(--font-mono);">S</div>
+          </div>
+          <div class="nft-info">
+            <div class="font-semibold text-sm">SolarMesh</div>
+            <div class="mono text-sm font-semibold mt-2">$2,800</div>
+            <div class="metric-change positive mono text-xs">↑18.7%</div>
+          </div>
+        </div>
+
+        <div class="nft-card" onclick="app.openModal('nft-detail-modal')">
+          <div class="nft-image" style="background: linear-gradient(135deg, #1a0a1a, #2e1a2e);">
+            <div style="width: 60px; height: 60px; border-radius: 12px; border: 2px solid var(--purple-500); box-shadow: 0 0 20px var(--purple-glow); display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: 700; font-family: var(--font-mono);">V</div>
+          </div>
+          <div class="nft-info">
+            <div class="font-semibold text-sm">VaultChain</div>
+            <div class="mono text-sm font-semibold mt-2">$5,100</div>
+            <div class="metric-change negative mono text-xs">↓3.2%</div>
+          </div>
+        </div>
+
+        <div class="nft-card" onclick="app.openModal('nft-detail-modal')">
+          <div class="nft-image" style="background: linear-gradient(135deg, #1a1a0a, #2e2a1a);">
+            <div style="width: 60px; height: 60px; border-radius: 12px; border: 2px solid var(--yellow-500); box-shadow: 0 0 20px rgba(251,191,36,0.25); display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: 700; font-family: var(--font-mono);">H</div>
+          </div>
+          <div class="nft-info">
+            <div class="font-semibold text-sm">HyperLogic</div>
+            <div class="mono text-sm font-semibold mt-2">$8,400</div>
+            <div class="metric-change positive mono text-xs">↑41.2%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== SCREEN: PUNCH BOWL (TRADING) ========== -->
+    <div class="screen" id="screen-punch-bowl">
+      <div class="screen-header">
+        <div class="flex items-center justify-between">
+          <div>
+            <div class="screen-title">Punch Bowl</div>
+            <div class="text-sm text-secondary mt-2">P2P Trading & Blending</div>
+          </div>
+          <div class="live-dot">Live</div>
+        </div>
+      </div>
+
+      <div class="tabs">
+        <button class="tab active" onclick="switchPunchTab(this, 'browse')">Browse</button>
+        <button class="tab" onclick="switchPunchTab(this, 'orders')">My Orders</button>
+        <button class="tab" onclick="switchPunchTab(this, 'blend')">Blend</button>
+      </div>
+
+      <!-- Trading pair card -->
+      <div class="card mb-3 fade-in">
+        <div class="flex items-center justify-between mb-4">
+          <div class="flex items-center gap-3">
+            <div class="company-logo-sm" style="background: linear-gradient(135deg, #1a2e1a, #0D2818);">N</div>
+            <div>
+              <div class="font-semibold text-sm">NeuralPath AI</div>
+              <div class="text-xs text-secondary">NFT-NPATH</div>
+            </div>
+          </div>
+          <div style="text-align: right;">
+            <div class="mono font-semibold">$14.82</div>
+            <div class="metric-change positive mono text-xs">↑5.3%</div>
+          </div>
+        </div>
+
+        <!-- Mini chart -->
+        <div style="position: relative; height: 80px; margin: 0 -8px;">
+          <svg width="100%" height="80" viewBox="0 0 360 80" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="punchGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="rgba(0,232,123,0.2)"/>
+                <stop offset="100%" stop-color="rgba(0,232,123,0)"/>
+              </linearGradient>
+            </defs>
+            <path d="M0,60 L20,55 L40,58 L60,45 L80,48 L100,42 L120,38 L140,40 L160,35 L180,30 L200,32 L220,28 L240,25 L260,30 L280,22 L300,18 L320,20 L340,15 L360,12" fill="url(#punchGrad)" stroke="none"/>
+            <path d="M0,60 L20,55 L40,58 L60,45 L80,48 L100,42 L120,38 L140,40 L160,35 L180,30 L200,32 L220,28 L240,25 L260,30 L280,22 L300,18 L320,20 L340,15 L360,12" fill="none" stroke="var(--green-500)" stroke-width="2" filter="url(#glow)"/>
+          </svg>
+        </div>
+
+        <div class="flex gap-2 mt-3">
+          <button class="btn btn-primary btn-sm flex-1">Buy</button>
+          <button class="btn btn-danger btn-sm flex-1">Sell</button>
+        </div>
+      </div>
+
+      <!-- Order Book -->
+      <div class="card fade-in-delay-1">
+        <div class="flex items-center justify-between mb-3">
+          <span class="font-semibold text-sm">Order Book</span>
+          <span class="text-xs text-secondary">Last 24h</span>
+        </div>
+
+        <div class="flex justify-between text-xs text-tertiary mb-2" style="padding: 0 0 var(--space-2); border-bottom: 1px solid var(--border-divider);">
+          <span>Price</span>
+          <span>Amount</span>
+          <span>Total</span>
+        </div>
+
+        <!-- Sell orders (red) -->
+        <div class="order-row sell">
+          <span class="price">$15.20</span>
+          <span class="mono" style="color: var(--text-secondary);">120</span>
+          <span class="mono text-right" style="color: var(--text-secondary);">$1,824</span>
+        </div>
+        <div class="order-row sell">
+          <span class="price">$15.05</span>
+          <span class="mono" style="color: var(--text-secondary);">85</span>
+          <span class="mono text-right" style="color: var(--text-secondary);">$1,279</span>
+        </div>
+        <div class="order-row sell">
+          <span class="price">$14.95</span>
+          <span class="mono" style="color: var(--text-secondary);">210</span>
+          <span class="mono text-right" style="color: var(--text-secondary);">$3,140</span>
+        </div>
+
+        <!-- Spread -->
+        <div style="padding: var(--space-2) 0; text-align: center; border-top: 1px solid var(--border-divider); border-bottom: 1px solid var(--border-divider);">
+          <span class="mono font-bold text-positive" style="font-size: 16px;">$14.82</span>
+          <span class="text-xs text-tertiary" style="margin-left: 6px;">Spread 0.4%</span>
+        </div>
+
+        <!-- Buy orders (green) -->
+        <div class="order-row buy">
+          <span class="price">$14.76</span>
+          <span class="mono" style="color: var(--text-secondary);">145</span>
+          <span class="mono text-right" style="color: var(--text-secondary);">$2,140</span>
+        </div>
+        <div class="order-row buy">
+          <span class="price">$14.60</span>
+          <span class="mono" style="color: var(--text-secondary);">302</span>
+          <span class="mono text-right" style="color: var(--text-secondary);">$4,409</span>
+        </div>
+        <div class="order-row buy">
+          <span class="price">$14.45</span>
+          <span class="mono" style="color: var(--text-secondary);">178</span>
+          <span class="mono text-right" style="color: var(--text-secondary);">$2,572</span>
+        </div>
+      </div>
+
+      <!-- Recent Trades -->
+      <div class="card mt-3 fade-in-delay-2">
+        <div class="font-semibold text-sm mb-3">Recent Trades</div>
+        <div class="table-row">
+          <div class="flex items-center gap-2">
+            <div style="width: 8px; height: 8px; border-radius: 50%; background: var(--green-500); box-shadow: 0 0 6px var(--green-glow-strong);"></div>
+            <span class="text-sm">Buy</span>
+          </div>
+          <span class="mono text-sm text-positive">$14.82</span>
+          <span class="mono text-sm text-secondary">50 units</span>
+          <span class="text-xs text-tertiary">2m ago</span>
+        </div>
+        <div class="table-row">
+          <div class="flex items-center gap-2">
+            <div style="width: 8px; height: 8px; border-radius: 50%; background: var(--pink-500); box-shadow: 0 0 6px var(--pink-glow);"></div>
+            <span class="text-sm">Sell</span>
+          </div>
+          <span class="mono text-sm text-negative">$14.90</span>
+          <span class="mono text-sm text-secondary">120 units</span>
+          <span class="text-xs text-tertiary">5m ago</span>
+        </div>
+        <div class="table-row">
+          <div class="flex items-center gap-2">
+            <div style="width: 8px; height: 8px; border-radius: 50%; background: var(--green-500); box-shadow: 0 0 6px var(--green-glow-strong);"></div>
+            <span class="text-sm">Buy</span>
+          </div>
+          <span class="mono text-sm text-positive">$14.78</span>
+          <span class="mono text-sm text-secondary">200 units</span>
+          <span class="text-xs text-tertiary">8m ago</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== SCREEN: SOCIAL ========== -->
+    <div class="screen" id="screen-social">
+      <div class="screen-header">
+        <div class="flex items-center justify-between">
+          <div class="screen-title">Disco Social</div>
+          <button class="btn btn-primary btn-sm btn-pill" onclick="app.openModal('post-modal')">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+            Post
+          </button>
+        </div>
+      </div>
+
+      <div class="tabs">
+        <button class="tab active">Feed</button>
+        <button class="tab">Activity</button>
+        <button class="tab">Trending</button>
+      </div>
+
+      <div id="social-feed"></div>
+    </div>
+
+    <!-- ========== SCREEN: PROFILE ========== -->
+    <div class="screen" id="screen-profile">
+      <div class="screen-header">
+        <div class="flex items-center justify-between">
+          <div class="screen-title">Profile</div>
+          <button class="btn btn-ghost" style="border-radius: var(--radius-md); border: 1px solid var(--border-card); padding: 8px;" onclick="app.openModal('settings-modal')">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Profile Header -->
+      <div class="card mb-4 fade-in" style="text-align: center; padding: var(--space-8) var(--space-6);">
+        <div class="avatar avatar-xl avatar-glow" style="margin: 0 auto var(--space-4); background: linear-gradient(135deg, var(--green-500), var(--cyan-500), var(--purple-500));">G</div>
+        <div style="font-size: 20px; font-weight: 700; margin-bottom: 4px;">Garrison</div>
+        <div class="text-sm text-secondary mb-3">@garrison · Joined Jan 2026</div>
+        <div class="flex items-center justify-center gap-2 mb-4">
+          <span class="badge badge-green">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><polygon points="12,2 15,8 22,8 16,13 18,20 12,16 6,20 8,13 2,8 9,8"/></svg>
+            Gold Investor
+          </span>
+          <span class="badge badge-purple">Early Access</span>
+        </div>
+        <div class="grid-3" style="max-width: 280px; margin: 0 auto;">
+          <div class="metric" style="align-items: center;">
+            <span class="mono font-bold" style="font-size: 18px;">12</span>
+            <span class="text-xs text-secondary">Investments</span>
+          </div>
+          <div class="metric" style="align-items: center;">
+            <span class="mono font-bold" style="font-size: 18px;">284</span>
+            <span class="text-xs text-secondary">Followers</span>
+          </div>
+          <div class="metric" style="align-items: center;">
+            <span class="mono font-bold" style="font-size: 18px;">47</span>
+            <span class="text-xs text-secondary">Following</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Analytics Card -->
+      <div class="card mb-4 fade-in-delay-1">
+        <div class="flex items-center justify-between mb-3">
+          <span class="font-semibold">Investment Analytics</span>
+          <div class="badge badge-green">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><polygon points="12,2 15,8 22,8 16,13 18,20 12,16 6,20 8,13 2,8 9,8"/></svg>
+          </div>
+        </div>
+
+        <div class="grid-3 mb-4">
+          <div class="metric">
+            <span class="metric-label">Monthly</span>
+            <span class="mono font-bold" style="font-size: 18px;">$8,097</span>
+            <span class="metric-change positive mono">↑19.6%</span>
+          </div>
+          <div class="metric">
+            <span class="metric-label">Yearly</span>
+            <span class="mono font-bold" style="font-size: 18px;">$47,832</span>
+            <span class="metric-change positive mono">↑2.5%</span>
+          </div>
+          <div class="metric">
+            <span class="metric-label">ROI</span>
+            <span class="mono font-bold text-positive" style="font-size: 18px;">47.2%</span>
+          </div>
+        </div>
+
+        <!-- Stacked columns -->
+        <div class="stacked-chart">
+          <div class="stacked-col"><div class="chart-bar-v glow-green-bar" style="height: 40%;"></div><div class="chart-bar-v" style="height: 20%; background: var(--cyan-500); box-shadow: 0 0 6px rgba(0,212,255,0.3); border-radius: var(--radius-full);"></div><div class="chart-bar-v" style="height: 15%; background: var(--purple-500); box-shadow: 0 0 6px rgba(139,92,246,0.3); border-radius: var(--radius-full);"></div><div class="chart-bar-v" style="height: 10%; background: var(--pink-500); box-shadow: 0 0 6px rgba(255,59,122,0.3); border-radius: var(--radius-full);"></div><div class="chart-bar-v" style="height: 8%; background: var(--text-tertiary); border-radius: var(--radius-full);"></div></div>
+          <div class="stacked-col"><div class="chart-bar-v glow-green-bar" style="height: 55%;"></div><div class="chart-bar-v" style="height: 15%; background: var(--cyan-500); box-shadow: 0 0 6px rgba(0,212,255,0.3); border-radius: var(--radius-full);"></div><div class="chart-bar-v" style="height: 10%; background: var(--purple-500); box-shadow: 0 0 6px rgba(139,92,246,0.3); border-radius: var(--radius-full);"></div><div class="chart-bar-v" style="height: 12%; background: var(--pink-500); box-shadow: 0 0 6px rgba(255,59,122,0.3); border-radius: var(--radius-full);"></div></div>
+          <div class="stacked-col"><div class="chart-bar-v glow-green-bar" style="height: 35%;"></div><div class="chart-bar-v" style="height: 25%; background: var(--cyan-500); box-shadow: 0 0 6px rgba(0,212,255,0.3); border-radius: var(--radius-full);"></div><div class="chart-bar-v" style="height: 20%; background: var(--blue-500); box-shadow: 0 0 6px rgba(59,130,246,0.3); border-radius: var(--radius-full);"></div><div class="chart-bar-v" style="height: 8%; background: var(--text-tertiary); border-radius: var(--radius-full);"></div></div>
+          <div class="stacked-col"><div class="chart-bar-v glow-green-bar" style="height: 60%;"></div><div class="chart-bar-v" style="height: 10%; background: var(--cyan-500); box-shadow: 0 0 6px rgba(0,212,255,0.3); border-radius: var(--radius-full);"></div><div class="chart-bar-v" style="height: 15%; background: var(--purple-500); box-shadow: 0 0 6px rgba(139,92,246,0.3); border-radius: var(--radius-full);"></div><div class="chart-bar-v" style="height: 5%; background: var(--text-tertiary); border-radius: var(--radius-full);"></div></div>
+          <div class="stacked-col"><div class="chart-bar-v glow-green-bar" style="height: 45%;"></div><div class="chart-bar-v" style="height: 20%; background: var(--cyan-500); box-shadow: 0 0 6px rgba(0,212,255,0.3); border-radius: var(--radius-full);"></div><div class="chart-bar-v" style="height: 10%; background: var(--purple-500); box-shadow: 0 0 6px rgba(139,92,246,0.3); border-radius: var(--radius-full);"></div><div class="chart-bar-v" style="height: 15%; background: var(--pink-500); box-shadow: 0 0 6px rgba(255,59,122,0.3); border-radius: var(--radius-full);"></div></div>
+          <div class="stacked-col"><div class="chart-bar-v glow-green-bar" style="height: 70%;"></div><div class="chart-bar-v" style="height: 8%; background: var(--cyan-500); box-shadow: 0 0 6px rgba(0,212,255,0.3); border-radius: var(--radius-full);"></div><div class="chart-bar-v" style="height: 12%; background: var(--blue-500); box-shadow: 0 0 6px rgba(59,130,246,0.3); border-radius: var(--radius-full);"></div></div>
+          <div class="stacked-col"><div class="chart-bar-v glow-green-bar" style="height: 50%;"></div><div class="chart-bar-v" style="height: 18%; background: var(--cyan-500); box-shadow: 0 0 6px rgba(0,212,255,0.3); border-radius: var(--radius-full);"></div><div class="chart-bar-v" style="height: 12%; background: var(--purple-500); box-shadow: 0 0 6px rgba(139,92,246,0.3); border-radius: var(--radius-full);"></div><div class="chart-bar-v" style="height: 8%; background: var(--pink-500); box-shadow: 0 0 6px rgba(255,59,122,0.3); border-radius: var(--radius-full);"></div></div>
+          <div class="stacked-col"><div class="chart-bar-v glow-green-bar" style="height: 80%;"></div><div class="chart-bar-v" style="height: 5%; background: var(--cyan-500); box-shadow: 0 0 6px rgba(0,212,255,0.3); border-radius: var(--radius-full);"></div><div class="chart-bar-v" style="height: 8%; background: var(--purple-500); box-shadow: 0 0 6px rgba(139,92,246,0.3); border-radius: var(--radius-full);"></div></div>
+        </div>
+        <div class="flex justify-between text-xs text-tertiary mono mt-2" style="padding: 0 2px;">
+          <span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span><span>Jul</span><span>Aug</span>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Table rows -->
+        <div class="table-row">
+          <span class="table-row-label" style="color: var(--green-500); text-shadow: 0 0 8px var(--green-glow); font-weight: 500;">AI / ML</span>
+          <span class="table-row-value">$18,240</span>
+        </div>
+        <div class="table-row">
+          <span class="table-row-label" style="color: var(--cyan-500); text-shadow: 0 0 8px var(--cyan-glow); font-weight: 500;">DeFi</span>
+          <span class="table-row-value">$14,100</span>
+        </div>
+        <div class="table-row">
+          <span class="table-row-label" style="color: var(--purple-500); text-shadow: 0 0 8px var(--purple-glow); font-weight: 500;">Climate</span>
+          <span class="table-row-value">$9,800</span>
+        </div>
+        <div class="table-row">
+          <span class="table-row-label" style="color: var(--pink-500); text-shadow: 0 0 8px var(--pink-glow); font-weight: 500;">Deep Tech</span>
+          <span class="table-row-value">$5,692</span>
+        </div>
+      </div>
+
+      <!-- Settings shortcuts -->
+      <div class="card fade-in-delay-2" style="padding: 0;">
+        <button class="flex items-center gap-3 w-full" style="padding: var(--space-4) var(--space-5); background: transparent; border: none; border-bottom: 1px solid var(--border-divider); color: var(--text-primary); cursor: pointer; font-family: var(--font-body); font-size: 14px;" onclick="app.openModal('settings-modal')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--text-secondary)" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          <span>Settings</span>
+          <svg style="margin-left: auto;" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text-tertiary)" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        <button class="flex items-center gap-3 w-full" style="padding: var(--space-4) var(--space-5); background: transparent; border: none; border-bottom: 1px solid var(--border-divider); color: var(--text-primary); cursor: pointer; font-family: var(--font-body); font-size: 14px;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--text-secondary)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <span>Security & Privacy</span>
+          <svg style="margin-left: auto;" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text-tertiary)" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        <button class="flex items-center gap-3 w-full" style="padding: var(--space-4) var(--space-5); background: transparent; border: none; border-bottom: 1px solid var(--border-divider); color: var(--text-primary); cursor: pointer; font-family: var(--font-body); font-size: 14px;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--text-secondary)" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          <span>Help & Support</span>
+          <svg style="margin-left: auto;" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text-tertiary)" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        <button class="flex items-center gap-3 w-full" style="padding: var(--space-4) var(--space-5); background: transparent; border: none; color: var(--pink-500); cursor: pointer; font-family: var(--font-body); font-size: 14px;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+          <span>Disconnect Wallet</span>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- ========== SCREEN: TRADING ========== -->
+    <div class="screen" id="screen-trading">
+      <div class="screen-header">
+        <div class="flex items-center justify-between">
+          <div class="screen-title">Trading</div>
+          <div class="live-dot">Live</div>
+        </div>
+      </div>
+
+      <div class="tabs">
+        <button class="tab active">Market</button>
+        <button class="tab">My Listings</button>
+        <button class="tab">History</button>
+      </div>
+
+      <!-- Market Overview Card -->
+      <div class="card mb-4 fade-in">
+        <div class="flex items-center justify-between mb-2">
+          <span class="font-semibold">Market Overview</span>
+          <div class="badge badge-green">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><polygon points="12,2 15,8 22,8 16,13 18,20 12,16 6,20 8,13 2,8 9,8"/></svg>
+            24h
+          </div>
+        </div>
+        <div class="grid-3 mb-4">
+          <div class="metric">
+            <span class="metric-label">Volume</span>
+            <span class="metric-value-sm mono font-bold">$284K</span>
+            <span class="metric-change positive mono">↑19.6%</span>
+          </div>
+          <div class="metric">
+            <span class="metric-label">Trades</span>
+            <span class="metric-value-sm mono font-bold">1,247</span>
+            <span class="metric-change positive mono">↑8.3%</span>
+          </div>
+          <div class="metric">
+            <span class="metric-label">Avg Price</span>
+            <span class="metric-value-sm mono font-bold">$227</span>
+            <span class="metric-change negative mono">↓2.1%</span>
+          </div>
+        </div>
+
+        <!-- Stacked Horizontal Bars -->
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <div class="flex items-center gap-2">
+            <span class="mono text-xs text-tertiary" style="width: 24px;">AI</span>
+            <div style="flex: 1; display: flex; height: 10px; border-radius: 5px; overflow: visible; gap: 2px;">
+              <div class="chart-bar-h glow-green-bar" style="width: 45%;"></div>
+              <div class="chart-bar-h" style="width: 20%; background: var(--text-tertiary); border-radius: var(--radius-full);"></div>
+            </div>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="mono text-xs text-tertiary" style="width: 24px;">DFi</span>
+            <div style="flex: 1; display: flex; height: 10px; border-radius: 5px; overflow: visible; gap: 2px;">
+              <div class="chart-bar-h glow-cyan-bar" style="width: 60%;"></div>
+              <div class="chart-bar-h" style="width: 15%; background: var(--text-tertiary); border-radius: var(--radius-full);"></div>
+            </div>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="mono text-xs text-tertiary" style="width: 24px;">Cli</span>
+            <div style="flex: 1; display: flex; height: 10px; border-radius: 5px; overflow: visible; gap: 2px;">
+              <div class="chart-bar-h glow-purple-bar" style="width: 35%;"></div>
+              <div class="chart-bar-h" style="width: 25%; background: var(--text-tertiary); border-radius: var(--radius-full);"></div>
+            </div>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="mono text-xs text-tertiary" style="width: 24px;">Bio</span>
+            <div style="flex: 1; display: flex; height: 10px; border-radius: 5px; overflow: visible; gap: 2px;">
+              <div class="chart-bar-h glow-pink-bar" style="width: 28%;"></div>
+              <div class="chart-bar-h" style="width: 30%; background: var(--text-tertiary); border-radius: var(--radius-full);"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Listings -->
+      <div class="section-label">Available Listings</div>
+
+      <div class="card card-glow mb-3 fade-in-delay-1">
+        <div class="flex items-center gap-3 mb-3">
+          <div class="company-logo-sm" style="background: linear-gradient(135deg, #1a2e1a, #0D2818);">N</div>
+          <div class="flex-1">
+            <div class="flex items-center gap-2">
+              <span class="font-semibold text-sm">NeuralPath AI</span>
+              <span class="badge badge-green">Verified</span>
+            </div>
+            <div class="text-xs text-secondary">500 units available</div>
+          </div>
+        </div>
+        <div class="flex items-center justify-between">
+          <div>
+            <span class="mono font-bold" style="font-size: 18px;">$14.82</span>
+            <span class="metric-change positive mono" style="margin-left: 6px;">↑5.3%</span>
+          </div>
+          <button class="btn btn-primary btn-sm">Trade</button>
+        </div>
+      </div>
+
+      <div class="card card-glow mb-3 fade-in-delay-2">
+        <div class="flex items-center gap-3 mb-3">
+          <div class="company-logo-sm" style="background: linear-gradient(135deg, #1a1a2e, #16213e);">S</div>
+          <div class="flex-1">
+            <div class="flex items-center gap-2">
+              <span class="font-semibold text-sm">SolarMesh</span>
+              <span class="badge badge-cyan">New</span>
+            </div>
+            <div class="text-xs text-secondary">1,200 units available</div>
+          </div>
+        </div>
+        <div class="flex items-center justify-between">
+          <div>
+            <span class="mono font-bold" style="font-size: 18px;">$8.45</span>
+            <span class="metric-change positive mono" style="margin-left: 6px;">↑12.1%</span>
+          </div>
+          <button class="btn btn-primary btn-sm">Trade</button>
+        </div>
+      </div>
+
+      <div class="card card-glow fade-in-delay-3">
+        <div class="flex items-center gap-3 mb-3">
+          <div class="company-logo-sm" style="background: linear-gradient(135deg, #2a1a2e, #1e1a2e);">V</div>
+          <div class="flex-1">
+            <div class="flex items-center gap-2">
+              <span class="font-semibold text-sm">VaultChain</span>
+            </div>
+            <div class="text-xs text-secondary">320 units available</div>
+          </div>
+        </div>
+        <div class="flex items-center justify-between">
+          <div>
+            <span class="mono font-bold" style="font-size: 18px;">$22.10</span>
+            <span class="metric-change negative mono" style="margin-left: 6px;">↓1.8%</span>
+          </div>
+          <button class="btn btn-primary btn-sm">Trade</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- BOTTOM NAV -->
+    <div class="bottom-nav">
+      <button class="nav-item active" onclick="app.goTo('screen-floors')">
+        <div class="nav-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        </div>
+        <span class="nav-label">Floors</span>
+      </button>
+      <button class="nav-item" onclick="app.goTo('screen-wallet')">
+        <div class="nav-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 12V8H6a2 2 0 0 1-2-2c0-1.1.9-2 2-2h12v4"/><path d="M4 6v12c0 1.1.9 2 2 2h14v-4"/><path d="M18 12a2 2 0 0 0 0 4h4v-4h-4z"/></svg>
+        </div>
+        <span class="nav-label">Wallet</span>
+      </button>
+      <button class="nav-item" onclick="app.goTo('screen-punch-bowl')">
+        <div class="nav-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 2h8l4 10H4L8 2z"/><path d="M12 12v6"/><path d="M8 22h8"/><path d="M7 12a5 5 0 0 0 10 0"/></svg>
+        </div>
+        <span class="nav-label">Punch</span>
+      </button>
+      <button class="nav-item" onclick="app.goTo('screen-social')">
+        <div class="nav-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <span class="nav-label">Social</span>
+      </button>
+      <button class="nav-item" onclick="app.goTo('screen-trading')">
+        <div class="nav-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+        </div>
+        <span class="nav-label">Trade</span>
+      </button>
+      <button class="nav-item" onclick="app.goTo('screen-profile')">
+        <div class="nav-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <span class="nav-label">Profile</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ============ MODALS ============ -->
+
+  <!-- Company Detail Modal -->
+  <div id="company-detail-modal" class="modal-overlay" onclick="if(event.target===this) app.closeModal('company-detail-modal')">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <span id="modal-company-name" class="font-semibold"></span>
+        <button class="btn-ghost" onclick="app.closeModal('company-detail-modal')">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="flex gap-4 items-center" style="margin-bottom: var(--space-5);">
+          <div class="company-logo" id="modal-company-logo"></div>
+          <div class="flex-col" style="flex: 1;">
+            <span id="modal-company-badge" class="badge" style="width: fit-content;"></span>
+            <p id="modal-company-desc" class="text-secondary" style="font-size: 12px; margin-top: var(--space-2);">Company description</p>
+          </div>
+        </div>
+        <div class="section-label">Key Metrics</div>
+        <div class="metric" style="margin-bottom: var(--space-4);">
+          <span class="metric-label">Funding Progress</span>
+          <span class="metric-value mono" id="modal-funding-amount" style="font-size: 20px;">$0 / $0</span>
+          <div class="progress-bar" style="margin-top: var(--space-2);">
+            <div class="progress-fill" id="modal-progress-fill" style="width: 0%"></div>
+          </div>
+        </div>
+        <div class="grid-3" style="gap: var(--space-2); margin-bottom: var(--space-5);">
+          <div class="metric">
+            <span class="metric-label">Raised</span>
+            <span class="metric-value-sm mono" id="modal-raised">$0M</span>
+          </div>
+          <div class="metric">
+            <span class="metric-label">Valuation</span>
+            <span class="metric-value-sm mono" id="modal-valuation">$0M</span>
+          </div>
+          <div class="metric">
+            <span class="metric-label">Min Invest</span>
+            <span class="metric-value-sm mono" id="modal-min-invest">$0</span>
+          </div>
+        </div>
+        <button class="btn btn-primary btn-full" onclick="app.openModal('invest-success-modal')">Invest Now</button>
+        <button class="btn btn-secondary btn-full" style="margin-top: var(--space-2);" onclick="app.closeModal('company-detail-modal')">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Invest Success Modal -->
+  <div id="invest-success-modal" class="modal-overlay" onclick="if(event.target===this) app.closeModal('invest-success-modal')">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <div class="modal-body" style="text-align: center; padding: var(--space-10) var(--space-6);">
+        <div style="font-size: 48px; margin-bottom: var(--space-4);">🎉</div>
+        <h3 class="text-2xl font-bold" style="margin-bottom: var(--space-2);">Investment Confirmed!</h3>
+        <p class="text-secondary" style="margin-bottom: var(--space-4);">You've invested <span class="mono font-bold" id="invest-amount">$5,000</span> in <span class="font-bold" id="invest-company">Company Name</span>.</p>
+        <p class="text-tertiary" style="font-size: 12px; margin-bottom: var(--space-6);">Your shares have been credited to your wallet.</p>
+        <button class="btn btn-primary btn-full" onclick="app.closeModal('invest-success-modal')">Great!</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Trade Modal -->
+  <div id="trade-modal" class="modal-overlay" onclick="if(event.target===this) app.closeModal('trade-modal')">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <span class="font-semibold">Buy Shares</span>
+        <button class="btn-ghost" onclick="app.closeModal('trade-modal')">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="input-group">
+          <label class="input-label">Company</label>
+          <input type="text" class="input" value="NeuralPath AI" readonly>
+        </div>
+        <div class="input-group">
+          <label class="input-label">Share Price</label>
+          <input type="text" class="input" value="$2,450" readonly>
+        </div>
+        <div class="input-group">
+          <label class="input-label">Quantity</label>
+          <input type="number" class="input" placeholder="0" value="1">
+        </div>
+        <div class="metric" style="background: var(--bg-input); padding: var(--space-4); border-radius: var(--radius-md); margin-bottom: var(--space-5);">
+          <span class="metric-label">Total Cost</span>
+          <span class="metric-value mono" style="font-size: 24px;">$2,450</span>
+        </div>
+        <button class="btn btn-primary btn-full">Buy Shares</button>
+        <button class="btn btn-secondary btn-full" style="margin-top: var(--space-2);" onclick="app.closeModal('trade-modal')">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notifications Modal -->
+  <div id="notifications-modal" class="modal-overlay" onclick="if(event.target===this) app.closeModal('notifications-modal')">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <span class="font-semibold">Notifications</span>
+        <button class="btn-ghost" onclick="app.closeModal('notifications-modal')">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="card-compact" style="margin-bottom: var(--space-2); background: var(--bg-input);">
+          <div class="flex justify-between items-center">
+            <div class="flex-col">
+              <span class="font-semibold" style="font-size: 13px;">Your investment in AI Corp is up 15%!</span>
+              <span class="text-tertiary" style="font-size: 11px;">2 hours ago</span>
+            </div>
+            <span style="color: var(--text-positive); font-weight: 600;">↑</span>
+          </div>
+        </div>
+        <div class="card-compact" style="margin-bottom: var(--space-2); background: var(--bg-input);">
+          <div class="flex justify-between items-center">
+            <div class="flex-col">
+              <span class="font-semibold" style="font-size: 13px;">GreenTech just closed their Series B</span>
+              <span class="text-tertiary" style="font-size: 11px;">5 hours ago</span>
+            </div>
+            <span style="color: var(--cyan-500); font-weight: 600;">📢</span>
+          </div>
+        </div>
+        <div class="card-compact" style="background: var(--bg-input);">
+          <div class="flex justify-between items-center">
+            <div class="flex-col">
+              <span class="font-semibold" style="font-size: 13px;">You received 50 bonus shares from referral</span>
+              <span class="text-tertiary" style="font-size: 11px;">Yesterday</span>
+            </div>
+            <span style="color: var(--yellow-500); font-weight: 600;">⭐</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NFT Detail Modal -->
+  <div id="nft-detail-modal" class="modal-overlay" onclick="if(event.target===this) app.closeModal('nft-detail-modal')">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <span id="nft-modal-title" class="font-semibold">NFT Details</span>
+        <button class="btn-ghost" onclick="app.closeModal('nft-detail-modal')">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="nft-image" id="nft-modal-image" style="border-radius: var(--radius-lg); margin-bottom: var(--space-4);">🎨</div>
+        <div class="metric" style="margin-bottom: var(--space-4);">
+          <span class="metric-label">Current Value</span>
+          <span class="metric-value mono" id="nft-modal-value" style="font-size: 24px;">$12,500</span>
+          <span class="metric-change positive mono">↑ 8.5%</span>
+        </div>
+        <div class="grid-2" style="margin-bottom: var(--space-4);">
+          <div class="metric">
+            <span class="metric-label">Floor Price</span>
+            <span class="metric-value-sm mono">$9,200</span>
+          </div>
+          <div class="metric">
+            <span class="metric-label">Rarity</span>
+            <span class="metric-value-sm mono">Rare</span>
+          </div>
+        </div>
+        <button class="btn btn-secondary btn-full">Sell NFT</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Edit Profile Modal -->
+  <div id="edit-profile-modal" class="modal-overlay" onclick="if(event.target===this) app.closeModal('edit-profile-modal')">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <span class="font-semibold">Edit Profile</span>
+        <button class="btn-ghost" onclick="app.closeModal('edit-profile-modal')">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="input-group">
+          <label class="input-label">Name</label>
+          <input type="text" class="input" value="Garrison">
+        </div>
+        <div class="input-group">
+          <label class="input-label">Username</label>
+          <input type="text" class="input" value="@garrison">
+        </div>
+        <div class="input-group">
+          <label class="input-label">Bio</label>
+          <input type="text" class="input" placeholder="Tell us about yourself">
+        </div>
+        <button class="btn btn-primary btn-full">Save Changes</button>
+        <button class="btn btn-secondary btn-full" style="margin-top: var(--space-2);" onclick="app.closeModal('edit-profile-modal')">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Referrals Modal -->
+  <div id="referrals-modal" class="modal-overlay" onclick="if(event.target===this) app.closeModal('referrals-modal')">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <span class="font-semibold">Invite Friends</span>
+        <button class="btn-ghost" onclick="app.closeModal('referrals-modal')">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="card" style="background: var(--bg-input); text-align: center; margin-bottom: var(--space-4);">
+          <div class="metric" style="align-items: center;">
+            <span class="metric-label">Your Referral Code</span>
+            <span class="metric-value mono" style="font-size: 24px;">GARRISON2024</span>
+          </div>
+          <button class="btn btn-secondary btn-sm" style="margin-top: var(--space-3);" onclick="navigator.clipboard.writeText('GARRISON2024')">Copy Code</button>
+        </div>
+        <div class="section-label">How it works</div>
+        <div style="font-size: 13px; line-height: 1.6;">
+          <p style="margin-bottom: var(--space-2);">✓ Each friend who signs up gets <span class="mono font-bold">$100</span> bonus</p>
+          <p style="margin-bottom: var(--space-2);">✓ You earn <span class="mono font-bold">5%</span> of their first investment</p>
+          <p>✓ Unlimited referrals = unlimited rewards</p>
+        </div>
+        <button class="btn btn-primary btn-full" style="margin-top: var(--space-4);">Share with Friends</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Settings Modal -->
+  <div id="settings-modal" class="modal-overlay" onclick="if(event.target===this) app.closeModal('settings-modal')">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <span class="font-semibold">Settings</span>
+        <button class="btn-ghost" onclick="app.closeModal('settings-modal')">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="section-label">Notifications</div>
+        <div class="flex justify-between items-center" style="padding: var(--space-3) 0; border-bottom: 1px solid var(--border-divider);">
+          <span>Price Alerts</span>
+          <input type="checkbox" checked style="width: 20px; height: 20px; cursor: pointer;">
+        </div>
+        <div class="flex justify-between items-center" style="padding: var(--space-3) 0;">
+          <span>Investment Updates</span>
+          <input type="checkbox" checked style="width: 20px; height: 20px; cursor: pointer;">
+        </div>
+        <div class="section-label">Account</div>
+        <button class="btn btn-secondary btn-full" style="margin-bottom: var(--space-2);">Change Password</button>
+        <button class="btn btn-secondary btn-full" style="margin-bottom: var(--space-2);">Two-Factor Auth</button>
+        <button class="btn btn-danger btn-full">Sign Out</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ===== DATA LAYER =====
+const app = {
+  currentScreen: 'screen-floors',
+  selectedCompany: null,
+  categoryDropdownOpen: false,
+  selectedFilters: { verticals: [], stages: [], vchosts: [] },
+  categoryData: {
+    verticals: [
+      'Nuclear Energy', 'Transportation', 'Robotics & Automation', 'Renewable Energy',
+      'AI & Machine Learning', 'Fintech & Blockchain', 'Advanced Manufacturing', 'Genetics',
+      'Materials', 'EdTech & Human Capital', 'AgTech & Food Innovation', 'Space',
+      'Cybersecurity & Privacy', 'Rebuilding the Grid'
+    ],
+    stages: ['Seed', 'Series A', 'Series B', 'Series C'],
+    vchosts: [
+      'Sequoia Capital', 'Y Combinator', 'A16Z', 'Khosla Ventures', 'Tiger Global',
+      'Flagship Pioneering', 'Ribbit Capital', 'Andreessen Horowitz', 'Breakthrough Energy', 'Lux Capital'
+    ]
+  },
+  // Map vertical labels to company sectors for filtering
+  verticalToSector: {
+    'AI & Machine Learning': ['AI/ML'],
+    'Fintech & Blockchain': ['DeFi', 'Web3', 'Fintech'],
+    'Renewable Energy': ['Energy', 'Climate'],
+    'Nuclear Energy': ['Energy'],
+    'Genetics': ['Biotech'],
+    'Robotics & Automation': ['Logistics'],
+    'Space': ['Quantum'],
+    'Cybersecurity & Privacy': ['Data'],
+    'Advanced Manufacturing': ['Quantum'],
+  },
+  companies: [
+    { id: 1, name: 'NeuralPath AI', logo: 'NP', color: '#8B5CF6', sector: 'AI/ML', stage: 'Series A', desc: 'Neural pathways for enterprise intelligence', raised: 4200000, goal: 5000000, round: '2.5M', valuation: '50M', minInvest: 1000, featured: true },
+    { id: 2, name: 'SolarMesh', logo: 'SM', color: '#FBBF24', sector: 'Energy', stage: 'Series A', desc: 'Distributed solar grid infrastructure', raised: 3100000, goal: 5000000, round: '1.8M', valuation: '35M', minInvest: 500 },
+    { id: 3, name: 'VaultChain', logo: 'VC', color: '#00D4FF', sector: 'DeFi', stage: 'Seed', desc: 'Decentralized vault storage protocol', raised: 2800000, goal: 4000000, round: '1.5M', valuation: '28M', minInvest: 750 },
+    { id: 4, name: 'HyperLogic', logo: 'HL', color: '#FF3B7A', sector: 'Quantum', stage: 'Series A', desc: 'Quantum-accelerated computation engine', raised: 5600000, goal: 8000000, round: '3.2M', valuation: '85M', minInvest: 2000 },
+    { id: 5, name: 'MediBlock', logo: 'MB', color: '#00E87B', sector: 'Biotech', stage: 'Pre-Seed', desc: 'Blockchain healthcare records system', raised: 1900000, goal: 3000000, round: '1.1M', valuation: '22M', minInvest: 500 },
+    { id: 6, name: 'AeroVerse', logo: 'AV', color: '#3B82F6', sector: 'Logistics', stage: 'Series A', desc: 'Autonomous aerial delivery network', raised: 7200000, goal: 10000000, round: '4.1M', valuation: '120M', minInvest: 1500 },
+    { id: 7, name: 'TokenGate', logo: 'TG', color: '#A855F7', sector: 'Web3', stage: 'Seed', desc: 'Token-gated access control platform', raised: 3400000, goal: 5000000, round: '1.9M', valuation: '40M', minInvest: 800 },
+    { id: 8, name: 'CarbonDAO', logo: 'CD', color: '#06B6D4', sector: 'Climate', stage: 'Series A', desc: 'Decentralized carbon credit marketplace', raised: 2300000, goal: 4000000, round: '1.3M', valuation: '32M', minInvest: 1200 },
+    { id: 9, name: 'SynthWave', logo: 'SW', color: '#EC4899', sector: 'AI/ML', stage: 'Seed', desc: 'Synthetic data generation for AI training', raised: 6100000, goal: 9000000, round: '3.5M', valuation: '95M', minInvest: 1000 },
+    { id: 10, name: 'DataNexus', logo: 'DN', color: '#F59E0B', sector: 'Data', stage: 'Series A', desc: 'Real-time data pipeline infrastructure', raised: 2100000, goal: 3500000, round: '1.2M', valuation: '25M', minInvest: 600 },
+    { id: 11, name: 'BioForge', logo: 'BF', color: '#10B981', sector: 'Biotech', stage: 'Seed', desc: 'Programmable biology synthesis platform', raised: 4800000, goal: 7000000, round: '2.7M', valuation: '65M', minInvest: 1800 },
+    { id: 12, name: 'FluxPay', logo: 'FP', color: '#6366F1', sector: 'Fintech', stage: 'Pre-Seed', desc: 'Dynamic pricing & payment layer', raised: 1700000, goal: 3000000, round: '0.97M', valuation: '18M', minInvest: 400 }
+  ],
+  nfts: [
+    { id: 1, name: 'Founder NFT #001', logo: 'FN', color: '#8B5CF6', value: 12500, change: 8.5 },
+    { id: 2, name: 'Investor Badge #042', logo: 'IB', color: '#00D4FF', value: 8200, change: 12.3 },
+    { id: 3, name: 'Early Bird #089', logo: 'EB', color: '#FBBF24', value: 5600, change: -2.1 },
+    { id: 4, name: 'Diamond Member', logo: 'DM', color: '#FF3B7A', value: 25000, change: 18.9 }
+  ],
+  posts: [
+    { author: 'Sarah Chen', avatar: '👩', handle: '@sarahchen', time: '2h ago', text: 'Just invested in NeuralPath AI - their ML pipeline is insane 🔥', likes: 342, comments: 28, reposts: 15, company: 'NeuralPath AI' },
+    { author: 'Marcus Indie', avatar: '👨', handle: '@marcusind', time: '4h ago', text: 'SolarMesh closing their Series A at $35M valuation. Incredible momentum!', likes: 1205, comments: 89, reposts: 342, company: 'SolarMesh' },
+    { author: 'Luna Crypto', avatar: '👩', handle: '@lunacrypto', time: '6h ago', text: 'Founder NFT holders just got airdropped 500 bonus shares. Bullish on ecosystem participation', likes: 567, comments: 44, reposts: 123 },
+    { author: 'Dev Alex', avatar: '👨', handle: '@devalex', time: '8h ago', text: 'Building the next generation of startup investing. Come dance with us 🕺', likes: 892, comments: 76, reposts: 234 },
+    { author: 'Jade Park', avatar: '👩', handle: '@jadepark', time: '10h ago', text: 'My portfolio up 24% this quarter. Diversification is key - spread across AI, biotech, and fintech', likes: 2341, comments: 156, reposts: 678 },
+    { author: 'Crypto Max', avatar: '👨', handle: '@cryptomax', time: '12h ago', text: 'VaultChain just launched their zero-knowledge protocol. DeFi is the future.', likes: 445, comments: 32, reposts: 98, company: 'VaultChain' },
+    { author: 'Tech Tina', avatar: '👩', handle: '@techtina', time: '14h ago', text: 'Attended BioForge demo day yesterday. CRISPR innovations are going to change medicine forever', likes: 734, comments: 61, reposts: 189, company: 'BioForge' },
+    { author: 'Venture Vince', avatar: '👨', handle: '@venturevince', time: '16h ago', text: 'Investing is not just about returns anymore. Its about backing founders who care about impact 🌱', likes: 1567, comments: 203, reposts: 445 },
+    { author: 'Amy Growth', avatar: '👩', handle: '@amygrowth', time: '18h ago', text: 'HyperLogic is hiring engineers. If you believe in quantum computing, apply now!', likes: 823, comments: 47, reposts: 156, company: 'HyperLogic' },
+    { author: 'Bob Builder', avatar: '👨', handle: '@bobbuilder', time: '20h ago', text: 'Just closed my first startup investment. Scared and excited at the same time 🚀', likes: 2100, comments: 234, reposts: 912 },
+    { author: 'Crystal Vision', avatar: '👩', handle: '@crystalvision', time: '22h ago', text: 'TokenGate is building something special. Access control is the next frontier', likes: 1899, comments: 145, reposts: 567, company: 'TokenGate' },
+    { author: 'David Science', avatar: '👨', handle: '@davidsci', time: '1d ago', text: 'AeroVerse demo blew my mind. Autonomous delivery is becoming reality much faster than expected', likes: 3456, comments: 312, reposts: 1203, company: 'AeroVerse' }
+  ],
+
+  startApp() {
+    document.getElementById('onboarding-screen').classList.remove('active');
+    document.getElementById('main-app').style.display = 'block';
+    this.renderFloors();
+    this.renderCategoryDropdown();
+    this.renderSocialFeed();
+    this.renderNFTGrid();
+  },
+
+  goTo(screenId) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById(screenId).classList.add('active');
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    event.target.closest('.nav-item')?.classList.add('active');
+    this.currentScreen = screenId;
+  },
+
+  formatCurrency(num) {
+    if (num >= 1000000) return '$' + (num / 1000000).toFixed(1) + 'M';
+    if (num >= 1000) return '$' + (num / 1000).toFixed(0) + 'K';
+    return '$' + num.toString();
+  },
+
+  getProgressPercent(raised, goal) {
+    return Math.round((raised / goal) * 100);
+  },
+
+  getBadgeClass(stage) {
+    const map = { 'Pre-Seed': 'badge-cyan', 'Seed': 'badge-purple', 'Series A': 'badge-green', 'AI/ML': 'badge-green', 'DeFi': 'badge-cyan', 'Climate': 'badge-yellow' };
+    return map[stage] || 'badge-green';
+  },
+
+  renderFloors() {
+    const featured = this.companies.find(c => c.featured);
+    const others = this.companies.filter(c => !c.featured);
+
+    let featuredHTML = '';
+    if (featured) {
+      const progress = this.getProgressPercent(featured.raised, featured.goal);
+      featuredHTML = `
+        <div class="card card-featured fade-in" style="cursor: pointer;" onclick="app.showCompanyDetail(${featured.id})">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="company-logo" style="background: linear-gradient(135deg, ${featured.color}40, ${featured.color}20); border-color: ${featured.color}40;">
+              <span>${featured.logo.substring(0, 1)}</span>
+            </div>
+            <div class="flex-1">
+              <div class="flex items-center gap-2">
+                <span class="font-semibold">${featured.name}</span>
+                <span class="badge ${this.getBadgeClass(featured.stage)}">HOT</span>
+              </div>
+              <div class="text-sm text-secondary">${featured.desc}</div>
+            </div>
+            <div class="live-dot">Live</div>
+          </div>
+
+          <div class="grid-3 mb-4">
+            <div class="metric">
+              <span class="metric-label">Raised</span>
+              <span class="metric-value-sm mono font-bold">${this.formatCurrency(featured.raised)}</span>
+              <span class="metric-change positive mono">↑34%</span>
+            </div>
+            <div class="metric">
+              <span class="metric-label">Valuation</span>
+              <span class="metric-value-sm mono font-bold">$${featured.valuation}</span>
+            </div>
+            <div class="metric">
+              <span class="metric-label">Investors</span>
+              <span class="metric-value-sm mono font-bold">847</span>
+            </div>
+          </div>
+
+          <div style="margin-bottom: var(--space-2);">
+            <div class="flex justify-between text-sm mb-2">
+              <span class="text-secondary">Funding Progress</span>
+              <span class="mono font-medium text-positive">${progress}%</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: ${progress}%;"></div>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-2 mt-3">
+            <span class="tag">${featured.stage}</span>
+            <span class="tag">${featured.sector}</span>
+            <span class="text-xs text-tertiary ml-auto mono">12d left</span>
+          </div>
+        </div>
+      `;
+    }
+
+    let othersHTML = others.map((c, idx) => {
+      const progress = this.getProgressPercent(c.raised, c.goal);
+      const progressColor = c.color;
+      return `
+        <div class="card card-glow fade-in-delay-${Math.min(idx, 3)}" style="cursor: pointer;" onclick="app.showCompanyDetail(${c.id})">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="company-logo" style="background: linear-gradient(135deg, ${c.color}40, ${c.color}20); border-color: ${c.color}40;">
+              <span>${c.logo.substring(0, 1)}</span>
+            </div>
+            <div class="flex-1">
+              <div class="font-semibold">${c.name}</div>
+              <div class="text-sm text-secondary">${c.desc}</div>
+            </div>
+            <span class="badge ${this.getBadgeClass(c.stage)}">${c.stage}</span>
+          </div>
+          <div class="grid-3 mb-3">
+            <div class="metric">
+              <span class="metric-label">Raised</span>
+              <span class="mono font-semibold">${this.formatCurrency(c.raised)}</span>
+            </div>
+            <div class="metric">
+              <span class="metric-label">Goal</span>
+              <span class="mono font-semibold">${this.formatCurrency(c.goal)}</span>
+            </div>
+            <div class="metric">
+              <span class="metric-label">Min.</span>
+              <span class="mono font-semibold">$${c.minInvest}</span>
+            </div>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: ${progress}%; background: ${c.color}; box-shadow: 0 0 8px ${c.color}66, 0 0 20px ${c.color}33;"></div>
+          </div>
+          <div class="flex items-center gap-2 mt-3">
+            <span class="tag">${c.sector}</span>
+            <span class="text-xs text-tertiary ml-auto mono">${Math.floor(Math.random() * 28) + 5}d left</span>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    document.getElementById('featured-company').innerHTML = featuredHTML;
+    document.getElementById('floors-list').innerHTML = othersHTML;
+  },
+
+  filterCompanies(query) {
+    const filtered = query ? this.getFilteredCompanies().filter(c => c.name.toLowerCase().includes(query.toLowerCase())) : this.getFilteredCompanies();
+    this.renderFilteredList(filtered);
+  },
+
+  toggleCategoryDropdown() {
+    this.categoryDropdownOpen = !this.categoryDropdownOpen;
+    const dd = document.getElementById('category-dropdown');
+    const toggle = document.getElementById('category-toggle');
+    if (this.categoryDropdownOpen) {
+      dd.classList.add('open');
+      toggle.classList.add('open');
+    } else {
+      dd.classList.remove('open');
+      toggle.classList.remove('open');
+    }
+  },
+
+  renderCategoryDropdown() {
+    // Verticals
+    const verticalsEl = document.getElementById('cat-verticals');
+    if (verticalsEl) {
+      verticalsEl.innerHTML = this.categoryData.verticals.map(v => {
+        const sel = this.selectedFilters.verticals.includes(v) ? ' selected' : '';
+        return `<button class="cat-chip${sel}" onclick="app.toggleFilter('verticals', '${v}')">${v}</button>`;
+      }).join('');
+    }
+    // Stages
+    const stagesEl = document.getElementById('cat-stages');
+    if (stagesEl) {
+      stagesEl.innerHTML = this.categoryData.stages.map(s => {
+        const sel = this.selectedFilters.stages.includes(s) ? ' selected' : '';
+        return `<button class="cat-stage-btn${sel}" onclick="app.toggleFilter('stages', '${s}')">${s}</button>`;
+      }).join('');
+    }
+    // VC Hosts
+    const vchostsEl = document.getElementById('cat-vchosts');
+    if (vchostsEl) {
+      vchostsEl.innerHTML = this.categoryData.vchosts.map(v => {
+        const sel = this.selectedFilters.vchosts.includes(v) ? ' selected' : '';
+        return `<button class="cat-chip${sel}" onclick="app.toggleFilter('vchosts', '${v}')">${v}</button>`;
+      }).join('');
+    }
+    this.renderActiveFilters();
+  },
+
+  toggleFilter(type, value) {
+    const idx = this.selectedFilters[type].indexOf(value);
+    if (idx === -1) {
+      this.selectedFilters[type].push(value);
+    } else {
+      this.selectedFilters[type].splice(idx, 1);
+    }
+    this.renderCategoryDropdown();
+    this.applyFilters();
+  },
+
+  removeFilter(type, value) {
+    const idx = this.selectedFilters[type].indexOf(value);
+    if (idx !== -1) {
+      this.selectedFilters[type].splice(idx, 1);
+    }
+    this.renderCategoryDropdown();
+    this.applyFilters();
+  },
+
+  renderActiveFilters() {
+    const container = document.getElementById('active-filters');
+    if (!container) return;
+    const all = [
+      ...this.selectedFilters.verticals.map(v => ({ type: 'verticals', value: v })),
+      ...this.selectedFilters.stages.map(s => ({ type: 'stages', value: s })),
+      ...this.selectedFilters.vchosts.map(v => ({ type: 'vchosts', value: v }))
+    ];
+
+    // Update toggle text
+    const toggle = document.getElementById('category-toggle');
+    if (toggle) {
+      const span = toggle.querySelector('span');
+      if (span) {
+        span.textContent = all.length > 0 ? `${all.length} Filter${all.length > 1 ? 's' : ''} Active` : 'All Categories';
+      }
+    }
+
+    if (all.length === 0) {
+      container.innerHTML = '';
+      return;
+    }
+    container.innerHTML = all.map(f =>
+      `<span class="active-filter-tag" onclick="app.removeFilter('${f.type}', '${f.value}')">
+        ${f.value}
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </span>`
+    ).join('');
+  },
+
+  getFilteredCompanies() {
+    let filtered = [...this.companies];
+    const { verticals, stages, vchosts } = this.selectedFilters;
+
+    // Filter by verticals (map to sectors)
+    if (verticals.length > 0) {
+      const matchSectors = new Set();
+      verticals.forEach(v => {
+        const mapped = this.verticalToSector[v];
+        if (mapped) mapped.forEach(s => matchSectors.add(s));
+      });
+      if (matchSectors.size > 0) {
+        filtered = filtered.filter(c => matchSectors.has(c.sector));
+      }
+    }
+
+    // Filter by funding stage
+    if (stages.length > 0) {
+      // Map display stages to data stages
+      const stageMap = { 'Seed': ['Seed', 'Pre-Seed'], 'Series A': ['Series A'], 'Series B': ['Series B'], 'Series C': ['Series C'] };
+      const matchStages = new Set();
+      stages.forEach(s => {
+        const mapped = stageMap[s];
+        if (mapped) mapped.forEach(st => matchStages.add(st));
+      });
+      filtered = filtered.filter(c => matchStages.has(c.stage));
+    }
+
+    // VC hosts don't map to company data directly (decorative for now)
+    return filtered;
+  },
+
+  applyFilters() {
+    const filtered = this.getFilteredCompanies();
+    // Update the section label to show count
+    const sectionLabels = document.querySelectorAll('#screen-floors .section-label');
+    if (sectionLabels.length >= 2) {
+      sectionLabels[1].textContent = `${filtered.filter(c => !c.featured).length} Active Floors`;
+    }
+    this.renderFilteredList(filtered);
+    // Also update featured
+    const featured = filtered.find(c => c.featured);
+    if (featured) {
+      document.getElementById('featured-company').style.display = '';
+      const fSection = sectionLabels[0];
+      if (fSection) fSection.style.display = '';
+    } else {
+      document.getElementById('featured-company').style.display = 'none';
+      const fSection = sectionLabels[0];
+      if (fSection) fSection.style.display = 'none';
+    }
+  },
+
+  renderFilteredList(companies) {
+    const featured = companies.find(c => c.featured);
+    const others = companies.filter(c => !c.featured);
+
+    let html = others.map((c, idx) => {
+      const progress = this.getProgressPercent(c.raised, c.goal);
+      return `
+        <div class="card card-glow" style="cursor: pointer;" onclick="app.showCompanyDetail(${c.id})">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="company-logo" style="background: linear-gradient(135deg, ${c.color}40, ${c.color}20); border-color: ${c.color}40;">
+              <span>${c.logo.substring(0, 1)}</span>
+            </div>
+            <div class="flex-1">
+              <div class="font-semibold">${c.name}</div>
+              <div class="text-sm text-secondary">${c.desc}</div>
+            </div>
+            <span class="badge ${this.getBadgeClass(c.stage)}">${c.stage}</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: ${progress}%; background: ${c.color};"></div>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    document.getElementById('floors-list').innerHTML = html;
+  },
+
+  showCompanyDetail(companyId) {
+    const company = this.companies.find(c => c.id === companyId);
+    if (!company) return;
+
+    const progress = this.getProgressPercent(company.raised, company.goal);
+    document.getElementById('modal-company-name').textContent = company.name;
+    document.getElementById('modal-company-logo').innerHTML = `<span style="font-weight: 700; font-size: 20px;">${company.logo.substring(0, 1)}</span>`;
+    document.getElementById('modal-company-logo').style.background = `linear-gradient(135deg, ${company.color}40, ${company.color}20)`;
+    document.getElementById('modal-company-badge').textContent = company.stage;
+    document.getElementById('modal-company-badge').className = `badge ${this.getBadgeClass(company.stage)}`;
+    document.getElementById('modal-company-desc').textContent = company.desc;
+    document.getElementById('modal-funding-amount').textContent = `${this.formatCurrency(company.raised)} / ${this.formatCurrency(company.goal)}`;
+    document.getElementById('modal-progress-fill').style.width = progress + '%';
+    document.getElementById('modal-progress-fill').style.background = company.color;
+    document.getElementById('modal-raised').textContent = company.round;
+    document.getElementById('modal-valuation').textContent = '$' + company.valuation;
+    document.getElementById('modal-min-invest').textContent = '$' + company.minInvest;
+
+    this.selectedCompany = company;
+    this.openModal('company-detail-modal');
+  },
+
+  renderSocialFeed() {
+    const html = this.posts.map(p => {
+      const companyLink = p.company ? `<span class="company-link" onclick="app.showCompanyDetail(app.companies.find(c => c.name === '${p.company}').id)">${p.company}</span>` : '';
+      return `
+        <div class="post-card">
+          <div class="flex gap-3 mb-3">
+            <div class="avatar" style="width: 40px; height: 40px; font-size: 14px;">${p.avatar}</div>
+            <div class="flex-1">
+              <div class="flex items-center gap-2">
+                <span class="font-semibold text-sm">${p.author}</span>
+                <span class="text-xs text-tertiary">${p.handle}</span>
+              </div>
+              <div class="text-xs text-tertiary">${p.time}</div>
+            </div>
+          </div>
+          <div class="text-sm leading-relaxed mb-3">${p.text}${companyLink ? ' ' + companyLink : ''}</div>
+          <div class="flex gap-4 text-xs text-tertiary">
+            <div class="flex items-center gap-1">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+              <span>${p.likes}</span>
+            </div>
+            <div class="flex items-center gap-1">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              <span>${p.comments}</span>
+            </div>
+            <div class="flex items-center gap-1">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 2 11 13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+              <span>${p.reposts}</span>
+            </div>
+          </div>
+        </div>
+      `;
+    }).join('');
+    document.getElementById('social-feed').innerHTML = html;
+  },
+
+  renderNFTGrid() {
+    const html = this.nfts.map(nft => `
+      <div class="nft-card" onclick="app.showNFTDetail(${nft.id})">
+        <div class="nft-image" style="background: linear-gradient(135deg, ${nft.color}40, ${nft.color}20);">
+          <div style="width: 60px; height: 60px; border-radius: 12px; border: 2px solid ${nft.color}; box-shadow: 0 0 20px ${nft.color}40; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 20px;">${nft.logo.substring(0, 1)}</div>
+        </div>
+        <div class="nft-info">
+          <div class="text-sm font-semibold">${nft.name}</div>
+          <div class="text-xs text-secondary mono">${this.formatCurrency(nft.value)}</div>
+          <div class="text-xs" style="color: ${nft.change > 0 ? 'var(--text-positive)' : 'var(--text-negative)'};"><span>${nft.change > 0 ? '↑' : '↓'}</span> ${Math.abs(nft.change)}%</div>
+        </div>
+      </div>
+    `).join('');
+    document.getElementById('nft-grid').innerHTML = html;
+  },
+
+  showNFTDetail(nftId) {
+    const nft = this.nfts.find(n => n.id === nftId);
+    if (!nft) return;
+
+    document.getElementById('nft-modal-title').textContent = nft.name;
+    document.getElementById('nft-modal-image').innerHTML = `<div style="width: 80px; height: 80px; border-radius: 16px; border: 3px solid ${nft.color}; box-shadow: 0 0 30px ${nft.color}40; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 32px;">${nft.logo.substring(0, 1)}</div>`;
+    document.getElementById('nft-modal-value').textContent = this.formatCurrency(nft.value);
+
+    this.openModal('nft-detail-modal');
+  },
+
+  openModal(modalId) {
+    document.getElementById(modalId).classList.add('active');
+  },
+
+  closeModal(modalId) {
+    document.getElementById(modalId).classList.remove('active');
+  }
+};
+
+// Punch Bowl tabs
+function switchPunchTab(el, tab) {
+  el.parentElement.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+}
+
+// Generic tab functionality
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.tabs').forEach(tabs => {
+    tabs.querySelectorAll('.tab').forEach(tab => {
+      tab.addEventListener('click', function() {
+        this.parentElement.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        this.classList.add('active');
+      });
+    });
+  });
+});
+
+// Initial render on load
+window.addEventListener('load', () => {
+  // App starts on onboarding
+});
+</script>
+
+</body>
+</html>
